@@ -73,7 +73,7 @@ Focus/
 ### 🔹 Badges 
 <p align="center">
   <img src="assets/image3.png" width="600"/>
-  <ima src="assets/image4.png> width="600"/>
+  <img src="assets/image4.png> width="600"/>
 </p>
 
 ### 🔹 Session completion
