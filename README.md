@@ -57,6 +57,33 @@ Focus/
 
 ---
 
+
+## 📸 Screenshots
+
+### 🔹 Popup UI
+<p align="center">
+  <img src="assets/image1.png" width="400"/>
+</p>
+
+### 🔹 AI YouTube Overlay and instagram blocking
+<p align="center">
+  <img src="assets/image2.png" width="600"/>
+</p>
+
+### 🔹 Badges 
+<p align="center">
+  <img src="assets/image3.png" width="600"/>
+  <ima src="assets/image4.png> width="600"/>
+</p>
+
+### 🔹 Session completion
+<p align="center">
+  <img src="assets/sessioncompletion.png" width="600"/>
+</p>
+
+
+---
+
 ##  How It Works
 
 ```
