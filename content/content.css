@@ -1,0 +1,312 @@
+/* ============================================================
+   FOCUS - Content Script Styles
+   Injected overlays, badges, warnings for YouTube & other sites
+   ============================================================ */
+
+/* ── Block Overlay ─────────────────────────────────────── */
+#focus-block-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.focus-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 10, 0.87);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.focus-overlay-card {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(145deg, #0f0f1a 0%, #141428 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 40px 44px;
+  max-width: 460px;
+  width: calc(100vw - 48px);
+  text-align: center;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 100, 100, 0.12);
+  animation: focus-card-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes focus-card-in {
+  from { transform: scale(0.85) translateY(20px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.focus-overlay-card .focus-icon {
+  font-size: 52px;
+  margin-bottom: 16px;
+  animation: focus-shake 0.5s ease 0.2s;
+}
+
+@keyframes focus-shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+.focus-overlay-card h2 {
+  color: #ff6b6b;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  letter-spacing: -0.3px;
+}
+
+.focus-overlay-card .focus-video-title {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13px;
+  font-style: italic;
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+
+.focus-overlay-card .focus-sub {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 15px;
+  margin: 0 0 28px;
+  line-height: 1.6;
+}
+
+.focus-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.focus-btn-primary,
+.focus-btn-secondary {
+  padding: 11px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.focus-btn-primary {
+  background: rgba(255, 107, 107, 0.12);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+.focus-btn-primary:hover {
+  background: rgba(255, 107, 107, 0.22);
+  transform: translateY(-1px);
+}
+
+.focus-btn-secondary {
+  background: linear-gradient(135deg, #00c896, #00a878);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 200, 150, 0.35);
+}
+.focus-btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 200, 150, 0.5);
+}
+
+.focus-overlay-card .focus-tip {
+  margin-top: 20px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+
+/* ── Tab Switch Warning (bottom toast) ──────────────────── */
+#focus-tab-warning {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483646;
+  animation: focus-slide-up 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+@keyframes focus-slide-up {
+  from { transform: translateX(-50%) translateY(80px); opacity: 0; }
+  to   { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+#focus-tab-warning.focus-warn-hide {
+  animation: focus-slide-down 0.4s ease forwards;
+}
+
+@keyframes focus-slide-down {
+  to { transform: translateX(-50%) translateY(80px); opacity: 0; }
+}
+
+.focus-warn-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 1px solid rgba(255, 180, 50, 0.3);
+  border-radius: 16px;
+  padding: 14px 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  min-width: 340px;
+  max-width: 90vw;
+}
+
+.focus-warn-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.focus-warn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.focus-warn-text strong {
+  color: #ffb432;
+  font-size: 14px;
+}
+
+.focus-warn-text span {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+.focus-warn-actions button {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+.focus-warn-actions button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+/* ── Allowed Badge ──────────────────────────────────────── */
+#focus-allowed-badge {
+  position: fixed;
+  top: 72px;
+  right: 16px;
+  z-index: 2147483645;
+  background: rgba(0, 200, 150, 0.12);
+  border: 1px solid rgba(0, 200, 150, 0.4);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 12px;
+  color: #00c896;
+  font-weight: 600;
+  animation: focus-badge-in 0.3s ease;
+  backdrop-filter: blur(8px);
+  transition: opacity 0.6s;
+}
+
+/* ── Warn Badge ─────────────────────────────────────────── */
+#focus-warn-badge {
+  position: fixed;
+  top: 72px;
+  right: 16px;
+  z-index: 2147483645;
+  background: rgba(255, 180, 50, 0.1);
+  border: 1px solid rgba(255, 180, 50, 0.35);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 12px;
+  color: #ffb432;
+  font-weight: 600;
+  animation: focus-badge-in 0.3s ease;
+  backdrop-filter: blur(8px);
+  transition: opacity 0.6s;
+}
+
+@keyframes focus-badge-in {
+  from { transform: translateY(-12px) scale(0.9); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.focus-badge-fade {
+  opacity: 0 !important;
+}
+
+/* ── Session End Banner ─────────────────────────────────── */
+#focus-session-end {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2147483647;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.focus-end-inner {
+  background: linear-gradient(145deg, #0d1117 0%, #161b22 100%);
+  border: 1px solid rgba(0, 200, 150, 0.3);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 200, 150, 0.1);
+  animation: focus-end-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes focus-end-in {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.focus-end-emoji {
+  font-size: 56px;
+  margin-bottom: 12px;
+  animation: focus-bounce 0.6s ease 0.2s;
+}
+
+@keyframes focus-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+.focus-end-inner h3 {
+  color: #00c896;
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+
+.focus-end-inner p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  margin: 0 0 24px;
+}
+
+.focus-end-inner button {
+  background: linear-gradient(135deg, #00c896, #00a878);
+  color: #fff;
+  border: none;
+  padding: 11px 28px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.focus-end-inner button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 200, 150, 0.4);
+}

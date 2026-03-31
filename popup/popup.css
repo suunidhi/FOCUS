@@ -1,0 +1,424 @@
+/* ============================================================
+   FOCUS Popup — Dark Premium UI
+   Inspired by MetaMask's minimal, clean UX
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:         #0a0a12;
+  --surface:    #111120;
+  --surface2:   #181830;
+  --border:     rgba(255,255,255,0.07);
+  --accent:     #00c896;
+  --accent-glow: rgba(0,200,150,0.25);
+  --danger:     #ff6b6b;
+  --warn:       #ffb432;
+  --text:       #e8e8f0;
+  --muted:      rgba(232,232,240,0.45);
+  --radius:     14px;
+  --radius-sm:  9px;
+  --font:       'Inter', system-ui, sans-serif;
+}
+
+html, body {
+  width: 360px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.fp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #0d0d1e 0%, var(--bg) 100%);
+}
+
+.fp-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fp-logo-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.fp-logo-text {
+  font-size: 18px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.fp-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.15);
+  transition: all 0.4s ease;
+}
+.fp-status-dot.active {
+  background: var(--accent);
+  border-color: var(--accent-glow);
+  box-shadow: 0 0 10px var(--accent-glow);
+  animation: fp-pulse 2s infinite;
+}
+
+@keyframes fp-pulse {
+  0%, 100% { box-shadow: 0 0 8px var(--accent-glow); }
+  50% { box-shadow: 0 0 18px rgba(0,200,150,0.5); }
+}
+
+/* ── Main Panel ──────────────────────────────────────────── */
+.fp-main {
+  padding: 20px;
+}
+
+.fp-hidden { display: none !important; }
+
+/* ── Section ─────────────────────────────────────────────── */
+.fp-section {
+  margin-bottom: 20px;
+}
+
+.fp-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* ── Duration Buttons ────────────────────────────────────── */
+.fp-duration-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.fp-dur-btn {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font);
+}
+
+.fp-dur-btn:hover {
+  border-color: rgba(255,255,255,0.15);
+  color: var(--text);
+}
+
+.fp-dur-btn.active {
+  background: rgba(0,200,150,0.1);
+  border-color: rgba(0,200,150,0.4);
+  color: var(--accent);
+  box-shadow: 0 0 12px rgba(0,200,150,0.1);
+}
+
+.fp-custom-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.fp-custom-label {
+  font-size: 12px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.fp-custom-input {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color 0.2s;
+  -moz-appearance: textfield;
+}
+.fp-custom-input::-webkit-outer-spin-button,
+.fp-custom-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.fp-custom-input:focus {
+  border-color: rgba(0,200,150,0.4);
+  box-shadow: 0 0 0 3px rgba(0,200,150,0.08);
+}
+.fp-custom-input::placeholder { color: rgba(255,255,255,0.2); }
+
+/* ── Mode Cards ──────────────────────────────────────────── */
+.fp-mode-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fp-mode-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.fp-mode-card:hover {
+  border-color: rgba(255,255,255,0.13);
+  background: var(--surface2);
+}
+
+.fp-mode-card.active {
+  border-color: rgba(0,200,150,0.4);
+  background: rgba(0,200,150,0.05);
+}
+
+.fp-mode-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.fp-mode-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.fp-mode-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.fp-mode-desc {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.fp-mode-check {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.fp-mode-card.active .fp-mode-check { opacity: 1; }
+
+/* ── Start Button ────────────────────────────────────────── */
+.fp-start-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #00c896 0%, #00a878 100%);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  letter-spacing: -0.2px;
+  box-shadow: 0 4px 24px rgba(0,200,150,0.35);
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.fp-start-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.fp-start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,200,150,0.5);
+}
+
+.fp-start-btn:hover::before { opacity: 1; }
+.fp-start-btn:active { transform: translateY(0px); }
+
+.fp-start-icon {
+  font-size: 16px;
+}
+
+/* ── Timer Ring ──────────────────────────────────────────── */
+.fp-timer-ring-wrap {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 4px auto 20px;
+}
+
+.fp-ring-svg {
+  width: 150px;
+  height: 150px;
+  transform: rotate(-90deg);
+}
+
+.fp-ring-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.06);
+  stroke-width: 8;
+}
+
+.fp-ring-progress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+  filter: drop-shadow(0 0 6px var(--accent-glow));
+}
+
+.fp-ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.fp-ring-time {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
+}
+
+.fp-ring-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Stats Row ───────────────────────────────────────────── */
+.fp-stats-row {
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  margin-bottom: 14px;
+}
+
+.fp-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.fp-stat-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.fp-stat-lbl {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.fp-stat-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--border);
+}
+
+/* ── Active Mode Badge ───────────────────────────────────── */
+.fp-active-mode {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(0,200,150,0.07);
+  border: 1px solid rgba(0,200,150,0.2);
+  border-radius: 20px;
+  padding: 6px 14px;
+  margin-bottom: 16px;
+}
+
+/* ── Stop Button ─────────────────────────────────────────── */
+.fp-stop-btn {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255,107,107,0.08);
+  color: var(--danger);
+  border: 1px solid rgba(255,107,107,0.25);
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fp-stop-btn:hover {
+  background: rgba(255,107,107,0.15);
+  border-color: rgba(255,107,107,0.4);
+  transform: translateY(-1px);
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.fp-footer {
+  border-top: 1px solid var(--border);
+  padding: 10px 20px;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  background: linear-gradient(0deg, #0c0c18 0%, var(--bg) 100%);
+}

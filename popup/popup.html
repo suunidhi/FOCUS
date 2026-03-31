@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Focus — AI Attention Guard</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────── -->
+  <header class="fp-header">
+    <div class="fp-logo">
+      <span class="fp-logo-icon">🧠</span>
+      <span class="fp-logo-text">Focus</span>
+    </div>
+    <div class="fp-status-dot" id="statusDot" title="Session Status"></div>
+  </header>
+
+  <!-- ── Main Panel ──────────────────────────────────────── -->
+  <main class="fp-main" id="mainPanel">
+
+    <!-- Setup View (shown when inactive) -->
+    <div id="setupView">
+
+      <!-- Duration Picker -->
+      <section class="fp-section">
+        <label class="fp-label">⏱ Session Duration</label>
+        <div class="fp-duration-row">
+          <button class="fp-dur-btn" data-mins="15">15m</button>
+          <button class="fp-dur-btn" data-mins="25">25m</button>
+          <button class="fp-dur-btn active" data-mins="45">45m</button>
+          <button class="fp-dur-btn" data-mins="60">60m</button>
+          <button class="fp-dur-btn" data-mins="90">90m</button>
+        </div>
+        <div class="fp-custom-row">
+          <label class="fp-custom-label">Custom</label>
+          <input type="number" id="customDuration" class="fp-custom-input" min="5" max="480" placeholder="min" />
+        </div>
+      </section>
+
+      <!-- Mode Picker -->
+      <section class="fp-section">
+        <label class="fp-label">🎯 Protection Mode</label>
+        <div class="fp-mode-grid">
+          <div class="fp-mode-card active" data-mode="smart">
+            <div class="fp-mode-icon">🤖</div>
+            <div class="fp-mode-info">
+              <span class="fp-mode-name">Smart Filter</span>
+              <span class="fp-mode-desc">AI decides based on content</span>
+            </div>
+            <div class="fp-mode-check">✓</div>
+          </div>
+          <div class="fp-mode-card" data-mode="strict">
+            <div class="fp-mode-icon">🔒</div>
+            <div class="fp-mode-info">
+              <span class="fp-mode-name">Strict Block</span>
+              <span class="fp-mode-desc">All distracting sites blocked</span>
+            </div>
+            <div class="fp-mode-check">✓</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Start Button -->
+      <button class="fp-start-btn" id="startBtn">
+        <span class="fp-start-icon">▶</span>
+        Start Focus Session
+      </button>
+
+    </div>
+
+    <!-- Active Session View -->
+    <div id="activeView" class="fp-hidden">
+
+      <!-- Timer Ring -->
+      <div class="fp-timer-ring-wrap">
+        <svg class="fp-ring-svg" viewBox="0 0 120 120">
+          <circle class="fp-ring-track" cx="60" cy="60" r="52"/>
+          <circle class="fp-ring-progress" id="ringProgress" cx="60" cy="60" r="52"
+            stroke-dasharray="326.7" stroke-dashoffset="0"/>
+        </svg>
+        <div class="fp-ring-center">
+          <span class="fp-ring-time" id="ringTime">--:--</span>
+          <span class="fp-ring-label">remaining</span>
+        </div>
+      </div>
+
+      <!-- Session Stats -->
+      <div class="fp-stats-row">
+        <div class="fp-stat">
+          <span class="fp-stat-val" id="statBlocked">0</span>
+          <span class="fp-stat-lbl">Blocked</span>
+        </div>
+        <div class="fp-stat-divider"></div>
+        <div class="fp-stat">
+          <span class="fp-stat-val" id="statAllowed">0</span>
+          <span class="fp-stat-lbl">Allowed</span>
+        </div>
+        <div class="fp-stat-divider"></div>
+        <div class="fp-stat">
+          <span class="fp-stat-val" id="statSwitches">0</span>
+          <span class="fp-stat-lbl">Tab Switches</span>
+        </div>
+      </div>
+
+      <!-- Active Mode Badge -->
+      <div class="fp-active-mode" id="activeModeTag">🤖 Smart Filter Active</div>
+
+      <!-- Stop Button -->
+      <button class="fp-stop-btn" id="stopBtn">⏹ End Session</button>
+
+    </div>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────── -->
+  <footer class="fp-footer">
+    <span id="footerStatus">Ready to focus</span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
